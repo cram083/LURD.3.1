@@ -32,7 +32,6 @@ public class MainMenuScreen implements Screen {
 
     Texture bg;
     SpriteBatch batch;
-    Color mycolor;
 
     int indicator = 40+Gdx.graphics.getHeight()/15;
     int sizeButton = (Gdx.graphics.getHeight()-6*20)/5-indicator/9;
@@ -47,13 +46,12 @@ public class MainMenuScreen implements Screen {
         bg = new Texture(files.internal("fone_12.png"));
         core = c;
         stage = new Stage();
-        mycolor = new Color(0, 225, 228, 1);
 
 
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("10369.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("9303.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.color = mycolor;
+        parameter.color = Color.YELLOW;
         parameter.size= Gdx.graphics.getWidth() / 17;
         font = generator.generateFont(parameter);
 

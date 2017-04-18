@@ -65,7 +65,6 @@ public class GameScreen implements Screen {
 
     Garbage garbage0;
     Garbage garbage1;
-    Color mycolor;
 
     FreeTypeFontGenerator generator;
     FreeTypeFontGenerator.FreeTypeFontParameter parameter;
@@ -79,14 +78,13 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         core = c;
         stage = new Stage();
-        mycolor = new Color(0, 225, 228, 1);
 
         core.pause = true;
         touchPause = true;
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("10369.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("9303.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.color = mycolor;
+        parameter.color = Color.BLUE;
         parameter.size= Gdx.graphics.getWidth() / 24;
         font = generator.generateFont(parameter);
 

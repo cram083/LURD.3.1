@@ -26,7 +26,6 @@ public class DeadMenuScreen implements Screen {
     Button pointImg;
     Button speedImg;
     Button bestImg;
-    Color mycolor;
 
     FreeTypeFontGenerator generator;
     FreeTypeFontGenerator.FreeTypeFontParameter parameter;
@@ -39,11 +38,10 @@ public class DeadMenuScreen implements Screen {
         core = c;
         batch = new SpriteBatch();
         stage = new Stage();
-        mycolor = new Color(0, 225, 228, 1);
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("10369.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("9303.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.color = mycolor;
+        parameter.color = Color.YELLOW;
         parameter.size= Gdx.graphics.getWidth() / 17;
         font = generator.generateFont(parameter);
 
