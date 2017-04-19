@@ -30,15 +30,16 @@ public class SettingsScreen implements Screen {
         stage.addActor( back = new Button("back1.png",20, Gdx.graphics.getHeight() - 20-size, size,size ));
 
         if(core.settingsPref.getBoolean("settingsVibro")==true){
-        stage.addActor( vibro = new Button("vibro.png", 100, 100, size,size));}
-        else {stage.addActor( vibro = new Button("vibroOff.png", 100, 100, 100, 100));}
+        stage.addActor( vibro = new Button("vibro.png", 0, Gdx.graphics.getHeight()-size*2-20, size,size));}
+        else {stage.addActor( vibro = new Button("vibroOff.png", 0, Gdx.graphics.getHeight()-size*2-20 , size, size));}
 
         if(core.settingsPref.getBoolean("settingsMusic")==true){
-            stage.addActor( music = new Button("music.png", 100, 300,Gdx.graphics.getHeight()/10, Gdx.graphics.getHeight()/10));}
-        else {stage.addActor(music = new Button("musicOff.png", 100, 300, Gdx.graphics.getHeight()/10, Gdx.graphics.getHeight()/10));}
+            stage.addActor( music = new Button("music.png", Gdx.graphics.getWidth()- size, Gdx.graphics.getHeight()-size*3-40,Gdx.graphics.getHeight()/10, Gdx.graphics.getHeight()/10));}
+        else {stage.addActor(music = new Button("musicOff.png", Gdx.graphics.getWidth()- size, Gdx.graphics.getHeight()-size*3-40, Gdx.graphics.getHeight()/10, Gdx.graphics.getHeight()/10));}
 
-        vibro.addAction(Actions.moveTo((int) (Math.random() * Gdx.graphics.getWidth()-size),0, 3));
-        music.addAction(Actions.moveTo((int) (Math.random() * Gdx.graphics.getWidth()-size),Gdx.graphics.getHeight()-size, 3));
+       // vibro.addAction(Actions.moveTo((int) Gdx.graphics.getWidth() - size, Gdx.graphics.getHeight()-size*2, 3));
+        vibro.addAction(Actions.moveTo(Gdx.graphics.getWidth() - size, vibro.getY(), 3));
+        music.addAction(Actions.moveTo((int) 0 , music.getY(),  3));
 
 
         Gdx.input.setInputProcessor(stage);
@@ -108,32 +109,20 @@ public class SettingsScreen implements Screen {
         stage.act();
         stage.draw();
 
-        if(vibro.getY()==0){
-            vibro.addAction(Actions.moveTo(Gdx.graphics.getWidth()-size, Gdx.graphics.getHeight()/2, 4));
-        }
-        if(vibro.getX()==Gdx.graphics.getWidth()-size){
-            vibro.addAction(Actions.moveTo(Gdx.graphics.getWidth()/2 ,Gdx.graphics.getHeight()-size ,4));
+        if(vibro.getX()==(Gdx.graphics.getWidth()-size)){
+            vibro.addAction(Actions.moveTo(0, vibro.getY(), 4));
         }
         if(vibro.getX()==0){
-            vibro.addAction(Actions.moveTo(Gdx.graphics.getWidth()/2, 0, 4));
-        }
-        if(vibro.getY()==Gdx.graphics.getHeight()-size){
-            vibro.addAction(Actions.moveTo(0, Gdx.graphics.getHeight()/2, 4));
+            vibro.addAction(Actions.moveTo( Gdx.graphics.getWidth()- size, vibro.getY(), 4));
         }
 
-
-        if(music.getY()==0){
-            music.addAction(Actions.moveTo(Gdx.graphics.getWidth()-size,Gdx.graphics.getHeight()/2, 4));
-        }
-        if(music.getX()==Gdx.graphics.getWidth()-size){
-            music.addAction(Actions.moveTo( Gdx.graphics.getWidth()/2 ,Gdx.graphics.getHeight()-size ,4));
-        }
         if(music.getX()==0){
-            music.addAction(Actions.moveTo(Gdx.graphics.getWidth()/2, 0, 4));
+            music.addAction(Actions.moveTo( Gdx.graphics.getWidth()- size, music.getY(), 4));
         }
-        if(music.getY()==Gdx.graphics.getHeight()-size){
-            music.addAction(Actions.moveTo(0, Gdx.graphics.getHeight()/2, 4));
+        if(music.getX()==(Gdx.graphics.getWidth()-size)){
+            music.addAction(Actions.moveTo(0, music.getY(), 4));
         }
+
     }
 
     @Override
