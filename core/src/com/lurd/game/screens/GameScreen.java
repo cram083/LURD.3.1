@@ -169,6 +169,7 @@ public class GameScreen implements Screen {
 
 
         Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
 
 
                  pause.addListener(new InputListener() {
