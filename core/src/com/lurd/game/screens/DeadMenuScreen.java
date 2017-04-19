@@ -41,7 +41,7 @@ public class DeadMenuScreen implements Screen {
         stage = new Stage();
         mycolor = new Color(0, 225, 228, 1);
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("10369.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("1234.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.color = mycolor;
         parameter.size= Gdx.graphics.getWidth() / 17;

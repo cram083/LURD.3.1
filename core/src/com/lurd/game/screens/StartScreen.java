@@ -33,7 +33,7 @@ public class StartScreen implements Screen {
         indexHight = Gdx.graphics.getHeight()/800;
         indexWeght = Gdx.graphics.getWidth()/480;
 
-        stage.addActor(Logo = new Button("Start1.png", -Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Gdx.graphics.getWidth()*3, Gdx.graphics.getHeight()/2));
+        stage.addActor(Logo = new Button("Logo0.png", -Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Gdx.graphics.getWidth()*3, Gdx.graphics.getHeight()/2));
         Logo.addAction(Actions.moveTo(Gdx.graphics.getWidth() / 7, Gdx.graphics.getHeight() / 2, 0.5f));
         Logo.addAction(Actions.sizeTo(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 3.5f), Gdx.graphics.getHeight() / 4, 0.5f));
 
@@ -77,9 +77,7 @@ public class StartScreen implements Screen {
                 GerGame.addAction(Actions.moveTo((Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 2.5f)) / 2, Gdx.graphics.getHeight() / 3, 0.5f));
 
         }
-       if(del==100){
-           Logo.setTexture("Start2.png");
-       }
+
 
         del++;
         if(del%200==0){
