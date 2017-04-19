@@ -1,6 +1,7 @@
 package com.lurd.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
@@ -17,6 +18,10 @@ import com.lurd.game.gui.Backgraund;
 import com.lurd.game.gui.Button;
 import com.lurd.game.gui.Garbage;
 import com.lurd.game.gui.Ships;
+
+import static com.badlogic.gdx.Gdx.input;
+import static com.badlogic.gdx.Input.*;
+import static com.badlogic.gdx.Input.Buttons.*;
 
 
 public class GameScreen implements Screen {
@@ -108,18 +113,10 @@ public class GameScreen implements Screen {
         stage.addActor(garbage0 = new Garbage(core));
        stage.addActor(garbage1 = new Garbage(core));
 
-        if(core.prefs.getInteger("record")>500) {
-
             stage.addActor(ship0 = new Ships("shipRed.png", 20, -objectSize, objectSize, objectSize));
             stage.addActor(ship1 = new Ships("shipYellow.png", objectSize + 40, -objectSize, objectSize, objectSize));
             stage.addActor(ship2 = new Ships("shipBlue.png", objectSize * 2 + 60, -objectSize, objectSize, objectSize));
-        }
-        if(core.prefs.getInteger("record")<=500){
 
-            stage.addActor(ship0 = new Ships("ship.png", 20, -objectSize, objectSize, objectSize));
-            stage.addActor(ship1 = new Ships("shipYellow3.png", objectSize + 40, -objectSize, objectSize, objectSize));
-            stage.addActor(ship2 = new Ships("shipbBlue.png", objectSize * 2 + 60, -objectSize, objectSize, objectSize));
-        }
 
         stage.addActor(pause = new Button("pause.png", Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 10 - 20f, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 12, Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 12));
         stage.addActor(exit = new Button("back1.png", -1000, -1000, Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 12));
@@ -458,6 +455,7 @@ public class GameScreen implements Screen {
         }
  }
 
+
     @Override
     public void show() {}
 
@@ -482,7 +480,10 @@ public class GameScreen implements Screen {
         font.draw(batch, "Best: "+core.prefs.getInteger("record"), 60+objectSize*2-objectSize/6, Gdx.graphics.getHeight()-10);
         batch.end();
 
-  }
+
+       }
+
+
 
 
     @Override

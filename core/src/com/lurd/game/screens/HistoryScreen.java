@@ -1,6 +1,7 @@
 package com.lurd.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.lurd.game.MainGame;
 import com.lurd.game.gui.Backgraund;
 import com.lurd.game.gui.Button;
+
+import static com.badlogic.gdx.Gdx.input;
 
 public class HistoryScreen implements Screen {
 
@@ -32,8 +35,11 @@ public class HistoryScreen implements Screen {
             @Override
             public boolean touchDown(InputEvent e, )
         });*/
+        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
 
     }
+
 
     @Override
     public void show() {
@@ -45,6 +51,7 @@ public class HistoryScreen implements Screen {
         batch.begin();
      //   font.draw(batch, "Best: 500", 40+Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/5+40 );
 //        font.draw(batch, " "+core.recordInt, 100, 100);
+
         batch.end();
         stage.act();
         stage.draw();
