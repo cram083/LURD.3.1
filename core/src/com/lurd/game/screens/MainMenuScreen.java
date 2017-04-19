@@ -51,7 +51,7 @@ public class MainMenuScreen implements Screen {
 
 
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("1234.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("10369.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.color = mycolor;
         parameter.size= Gdx.graphics.getWidth() / 17;
