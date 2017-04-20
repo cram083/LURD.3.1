@@ -6,8 +6,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.lurd.game.MainGame;
 import com.lurd.game.gui.Button;
@@ -84,7 +82,7 @@ public class InfoScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
-        batch.draw(backgraund, 0, 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(backgraund, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
         stage.act();
         stage.draw();

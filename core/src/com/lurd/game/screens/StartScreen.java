@@ -21,8 +21,7 @@ public class StartScreen implements Screen {
 
     Button Logo;
     Button GerGame;
-
-
+    private int del = 0;
 
     public StartScreen(MainGame c) {
         core = c;
@@ -30,14 +29,14 @@ public class StartScreen implements Screen {
         stage = new Stage();
         background = new Texture("fone_12.png");
 
-        indexHight = Gdx.graphics.getHeight()/800;
-        indexWeght = Gdx.graphics.getWidth()/480;
+        indexHight = Gdx.graphics.getHeight() / 800;
+        indexWeght = Gdx.graphics.getWidth() / 480;
 
-        stage.addActor(Logo = new Button("Logo0.png", -Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Gdx.graphics.getWidth()*3, Gdx.graphics.getHeight()/2));
+        stage.addActor(Logo = new Button("Logo0.png", -Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Gdx.graphics.getWidth() * 3, Gdx.graphics.getHeight() / 2));
         Logo.addAction(Actions.moveTo(Gdx.graphics.getWidth() / 7, Gdx.graphics.getHeight() / 2, 0.5f));
         Logo.addAction(Actions.sizeTo(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 3.5f), Gdx.graphics.getHeight() / 4, 0.5f));
 
-        stage.addActor(GerGame = new Button("GerrorGame.png", -Gdx.graphics.getWidth() / 2.5f, Gdx.graphics.getHeight()/3, Gdx.graphics.getWidth() / 2.5f, Gdx.graphics.getHeight() / 10));
+        stage.addActor(GerGame = new Button("GerrorGame.png", -Gdx.graphics.getWidth() / 2.5f, Gdx.graphics.getHeight() / 3, Gdx.graphics.getWidth() / 2.5f, Gdx.graphics.getHeight() / 10));
 
       /*  stage.addActor(Logo = new Button("Logo.png", Gdx.graphics.getWidth()/5.724f, Gdx.graphics.getHeight()/2.666f, Gdx.graphics.getHeight()/4, Gdx.graphics.getHeight()/4));
         stage.addActor(u = new Button("u.png", Gdx.graphics.getWidth()/4.373f, Gdx.graphics.getHeight()/2.453f, Gdx.graphics.getHeight()/4, Gdx.graphics.getHeight()/4));
@@ -53,17 +52,12 @@ public class StartScreen implements Screen {
         stage.addActor(d = new Button("d.png", 268, 300, 200, 200));*/
 
 
-
-
-
     }
 
     @Override
     public void show() {
 
     }
-
-    private int del = 0;
 
     @Override
     public void render(float delta) {
@@ -73,23 +67,25 @@ public class StartScreen implements Screen {
         stage.act();
         stage.draw();
 
-        if(Logo.getY()==Gdx.graphics.getHeight() / 2){
-                GerGame.addAction(Actions.moveTo((Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 2.5f)) / 2, Gdx.graphics.getHeight() / 3, 0.5f));
+        if (Logo.getY() == Gdx.graphics.getHeight() / 2) {
+            GerGame.addAction(Actions.moveTo((Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 2.5f)) / 2, Gdx.graphics.getHeight() / 3, 0.5f));
 
         }
 
 
         del++;
-        if(del%200==0){
-            if(core.prefs.getBoolean("FirstNo")==false){
-              core.setScreen(new HistoryScreen(core));
-            core.prefs.putBoolean("FirstNo", true);
-            core.prefs.flush();}
-            if(core.prefs.getBoolean("FirstNo")==true){
-                core.setScreen(new MainMenuScreen(core));}
+        if (del % 200 == 0) {
+            if (core.prefs.getBoolean("FirstNo") == false) {
+                core.setScreen(new HistoryScreen(core));
+                core.prefs.putBoolean("FirstNo", true);
+                core.prefs.flush();
+            }
+            if (core.prefs.getBoolean("FirstNo") == true) {
+                core.setScreen(new MainMenuScreen(core));
+            }
 
         }
-        Gdx.app.log("Del", " "+del);
+        Gdx.app.log("Del", " " + del);
 
     }
 
@@ -117,7 +113,6 @@ public class StartScreen implements Screen {
     public void dispose() {
 
     }
-
 
 
 }

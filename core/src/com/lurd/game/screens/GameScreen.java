@@ -1,7 +1,6 @@
 package com.lurd.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
@@ -19,10 +18,6 @@ import com.lurd.game.gui.Button;
 import com.lurd.game.gui.Garbage;
 import com.lurd.game.gui.Ships;
 
-import static com.badlogic.gdx.Gdx.input;
-import static com.badlogic.gdx.Input.*;
-import static com.badlogic.gdx.Input.Buttons.*;
-
 
 public class GameScreen implements Screen {
 
@@ -32,7 +27,7 @@ public class GameScreen implements Screen {
 
     int point2;
     int point;
-    int speedInt = 1 ;
+    int speedInt = 1;
 
     Stage stage;
 
@@ -44,8 +39,6 @@ public class GameScreen implements Screen {
 
     Button pause;
     Button exit;
-
-
 
 
     Backgraund backgraund0;
@@ -65,7 +58,7 @@ public class GameScreen implements Screen {
 
     Music Music;
 
-    int del = Gdx.graphics.getHeight()/200;
+    int del = Gdx.graphics.getHeight() / 200;
 
 
     Garbage garbage0;
@@ -76,7 +69,6 @@ public class GameScreen implements Screen {
     FreeTypeFontGenerator.FreeTypeFontParameter parameter;
 
     float objectSize = (Gdx.graphics.getWidth() - 80f) / 3;
-
 
 
     public GameScreen(final MainGame c) {
@@ -92,7 +84,7 @@ public class GameScreen implements Screen {
         generator = new FreeTypeFontGenerator(Gdx.files.internal("1234.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.color = mycolor;
-        parameter.size= Gdx.graphics.getWidth() / 24;
+        parameter.size = Gdx.graphics.getWidth() / 24;
         font = generator.generateFont(parameter);
 
 
@@ -108,14 +100,12 @@ public class GameScreen implements Screen {
         stage.addActor(backgraund1 = new Backgraund("fone_12.png"));
 
 
-
-
         stage.addActor(garbage0 = new Garbage(core));
-       stage.addActor(garbage1 = new Garbage(core));
+        stage.addActor(garbage1 = new Garbage(core));
 
-            stage.addActor(ship0 = new Ships("shipRed.png", 20, -objectSize, objectSize, objectSize));
-            stage.addActor(ship1 = new Ships("shipYellow.png", objectSize + 40, -objectSize, objectSize, objectSize));
-            stage.addActor(ship2 = new Ships("shipBlue.png", objectSize * 2 + 60, -objectSize, objectSize, objectSize));
+        stage.addActor(ship0 = new Ships("shipRed.png", 20, -objectSize, objectSize, objectSize));
+        stage.addActor(ship1 = new Ships("shipYellow.png", objectSize + 40, -objectSize, objectSize, objectSize));
+        stage.addActor(ship2 = new Ships("shipBlue.png", objectSize * 2 + 60, -objectSize, objectSize, objectSize));
 
 
         stage.addActor(pause = new Button("pause.png", Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 10 - 20f, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 12, Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 12));
@@ -126,34 +116,36 @@ public class GameScreen implements Screen {
         backgraund1.setPosition(0, Gdx.graphics.getHeight());
 
 
-
-
-
         ship0.addAction(Actions.moveTo(ship0.getX(), 20, 2));
         ship1.addAction(Actions.moveTo(ship1.getX(), 20, 1));
         ship2.addAction(Actions.moveTo(ship2.getX(), 20, 2));
 
 
-
         int randomPos = (int) (Math.random() * 3);
         Gdx.app.log(null, " " + randomPos);
-        switch (randomPos){
-            case(0): garbage0.setPosition(20, Gdx.graphics.getHeight()*2);
+        switch (randomPos) {
+            case (0):
+                garbage0.setPosition(20, Gdx.graphics.getHeight() * 2);
                 break;
-            case(1): garbage0.setPosition(40+ objectSize, Gdx.graphics.getHeight()*2);
+            case (1):
+                garbage0.setPosition(40 + objectSize, Gdx.graphics.getHeight() * 2);
                 break;
-            case(2): garbage0.setPosition(60+ objectSize *2, Gdx.graphics.getHeight()*2);
+            case (2):
+                garbage0.setPosition(60 + objectSize * 2, Gdx.graphics.getHeight() * 2);
                 break;
         }
 
         randomPos = (int) (Math.random() * 3);
         Gdx.app.log(null, " " + randomPos);
-        switch (randomPos){
-            case(0): garbage1.setPosition(20, Gdx.graphics.getHeight()*2+Gdx.graphics.getHeight()/2+ objectSize /2);
+        switch (randomPos) {
+            case (0):
+                garbage1.setPosition(20, Gdx.graphics.getHeight() * 2 + Gdx.graphics.getHeight() / 2 + objectSize / 2);
                 break;
-            case(1): garbage1.setPosition(40 + objectSize, Gdx.graphics.getHeight()*2+Gdx.graphics.getHeight()/2+ objectSize /2);
+            case (1):
+                garbage1.setPosition(40 + objectSize, Gdx.graphics.getHeight() * 2 + Gdx.graphics.getHeight() / 2 + objectSize / 2);
                 break;
-            case(2): garbage1.setPosition(60 + objectSize * 2, Gdx.graphics.getHeight()*2+Gdx.graphics.getHeight()/2+ objectSize /2);
+            case (2):
+                garbage1.setPosition(60 + objectSize * 2, Gdx.graphics.getHeight() * 2 + Gdx.graphics.getHeight() / 2 + objectSize / 2);
                 break;
         }
 
@@ -169,220 +161,235 @@ public class GameScreen implements Screen {
         Gdx.input.setCatchBackKey(true);
 
 
-                 pause.addListener(new InputListener() {
-                @Override
-                public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
-                    if(core.settingsPref.getBoolean("settingsVibro")==true){
-                        Gdx.input.vibrate(50);}
-                    if (core.pause == true) {
-                        pause.setTexture("play.png");
-                        Music.pause();
-                        exit.setPosition(pause.getX(), pause.getY() - 20 - exit.getHeight());
-                        core.pause = false;
-                    } else {
-                        if (core.pause == false) {
-                            core.pause = true;
-                            pause.setTexture("pause.png");
-                            if (core.settingsPref.getBoolean("settingsMusic") == true) {
-                                Music.setLooping(true);
-                                Music.play();
-                            }
-                           exit.setPosition(Gdx.graphics.getWidth() + 20, pause.getY() - 20 - exit.getHeight());
-                        }
-                    }
-
-                    pause();
-
-                    return true;
+        pause.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                if (core.settingsPref.getBoolean("settingsVibro") == true) {
+                    Gdx.input.vibrate(50);
                 }
-            });
+                if (core.pause == true) {
+                    pause.setTexture("play.png");
+                    Music.pause();
+                    exit.setPosition(pause.getX(), pause.getY() - 20 - exit.getHeight());
+                    core.pause = false;
+                } else {
+                    if (core.pause == false) {
+                        core.pause = true;
+                        pause.setTexture("pause.png");
+                        if (core.settingsPref.getBoolean("settingsMusic") == true) {
+                            Music.setLooping(true);
+                            Music.play();
+                        }
+                        exit.setPosition(Gdx.graphics.getWidth() + 20, pause.getY() - 20 - exit.getHeight());
+                    }
+                }
 
-          exit.addListener(new InputListener() {
+                pause();
+
+                return true;
+            }
+        });
+
+        exit.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
                 Music.stop();
-                if(core.settingsPref.getBoolean("settingsVibro")==true){
-                    Gdx.input.vibrate(50);}
+                if (core.settingsPref.getBoolean("settingsVibro") == true) {
+                    Gdx.input.vibrate(50);
+                }
                 core.setScreen(new MainMenuScreen(core));
                 if (core.settingsPref.getBoolean("settingsMusic") == true) {
                     core.MenuMusic.setLooping(true);
-                    core.MenuMusic.play();}
+                    core.MenuMusic.play();
+                }
                 return true;
-                  }
+            }
         });
 
-            rctShip0 = new Rectangle((int) ship0.getX()+ objectSize /4, (int) ship0.getY()+ objectSize /4, (int) ship0.getWidth()- objectSize /2, (int) ship0.getHeight()- objectSize /2);
-            rctShip1 = new Rectangle((int) ship1.getX()+ objectSize /4, (int) ship1.getY()+ objectSize /4, (int) ship1.getWidth()- objectSize /2, (int) ship1.getHeight()- objectSize /2);
-            rctShip2 = new Rectangle((int) ship2.getX()+ objectSize /4, (int) ship2.getY()+ objectSize /4, (int) ship2.getWidth()- objectSize /2, (int) ship2.getHeight()- objectSize /2);
+        rctShip0 = new Rectangle((int) ship0.getX() + objectSize / 4, (int) ship0.getY() + objectSize / 4, (int) ship0.getWidth() - objectSize / 2, (int) ship0.getHeight() - objectSize / 2);
+        rctShip1 = new Rectangle((int) ship1.getX() + objectSize / 4, (int) ship1.getY() + objectSize / 4, (int) ship1.getWidth() - objectSize / 2, (int) ship1.getHeight() - objectSize / 2);
+        rctShip2 = new Rectangle((int) ship2.getX() + objectSize / 4, (int) ship2.getY() + objectSize / 4, (int) ship2.getWidth() - objectSize / 2, (int) ship2.getHeight() - objectSize / 2);
 
 
-            rctGarbage0 = new Rectangle((int) garbage0.getX() + 30, (int) garbage0.getY() + 30, (int) garbage0.getWidth() - 60, (int) garbage0.getHeight() - 60);
-            rctGarbage1 = new Rectangle((int) garbage1.getX() + 30, (int) garbage1.getY() + 30, (int) garbage1.getWidth() - 60, (int) garbage1.getHeight() - 60);
+        rctGarbage0 = new Rectangle((int) garbage0.getX() + 30, (int) garbage0.getY() + 30, (int) garbage0.getWidth() - 60, (int) garbage0.getHeight() - 60);
+        rctGarbage1 = new Rectangle((int) garbage1.getX() + 30, (int) garbage1.getY() + 30, (int) garbage1.getWidth() - 60, (int) garbage1.getHeight() - 60);
 
 
-            ship0.addListener(new InputListener() {
-                @Override
-                public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
-                    dx = x;
-                    dy = y;
-                    return true;
-                }
+        ship0.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                dx = x;
+                dy = y;
+                return true;
+            }
 
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    ux = x;
-                    uy = y;
-                    String direction = motion(ux - dx, uy - dy);
-                    if (direction.equals("Up")) {
-                        if (ship0.getY() == 20f) {
-                            if ((ship0.getX() != ship1.getX()) && (ship0.getX() != ship2.getX())) {
-                                if(core.pause==true){
-                                ship0.addAction(Actions.moveTo(ship0.getX(), ship0.getY() + objectSize + 20, 0.05f));}
-                            }
-                        }
-                    } else if (direction.equals("Down")) {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ux = x;
+                uy = y;
+                String direction = motion(ux - dx, uy - dy);
+                if (direction.equals("Up")) {
+                    if (ship0.getY() == 20f) {
                         if ((ship0.getX() != ship1.getX()) && (ship0.getX() != ship2.getX())) {
-                            if(core.pause==true){
-                            ship0.addAction(Actions.moveTo(ship0.getX(), ship0.getY() - objectSize - 20, 0.05f));}
-                        }
-                    } else if (direction.equals("Right")) {
-                        if ((((ship1.getX() != ship0.getX() + objectSize + 20f) && (ship0.getY() == ship1.getY())) || (ship0.getY() != ship1.getY())) &&
-                                (((ship2.getX() != ship0.getX() + objectSize + 20f) && (ship0.getY() == ship2.getY())) || (ship0.getY() != ship2.getY()))) {
-                            if (ship0.getX() < Gdx.graphics.getWidth() - objectSize - 40) {
-                                if(core.pause==true){
-                                ship0.addAction(Actions.moveTo(ship0.getX() + objectSize + 20, ship0.getY(), 0.05f));}
+                            if (core.pause == true) {
+                                ship0.addAction(Actions.moveTo(ship0.getX(), ship0.getY() + objectSize + 20, 0.05f));
                             }
                         }
-                    } else if (direction.equals("Left")) {
-                        if ((((ship1.getX() != ship0.getX() - objectSize - 20f) && (ship0.getY() == ship1.getY())) || (ship0.getY() != ship1.getY())) &&
-                                (((ship2.getX() != ship0.getX() - objectSize - 20f) && (ship0.getY() == ship2.getY())) || (ship0.getY() != ship2.getY()))) {
-                            if (ship0.getX() > 40) {
-                                if(core.pause==true){
-                                ship0.addAction(Actions.moveTo(ship0.getX() - objectSize - 20, ship0.getY(), 0.05f));}
+                    }
+                } else if (direction.equals("Down")) {
+                    if ((ship0.getX() != ship1.getX()) && (ship0.getX() != ship2.getX())) {
+                        if (core.pause == true) {
+                            ship0.addAction(Actions.moveTo(ship0.getX(), ship0.getY() - objectSize - 20, 0.05f));
+                        }
+                    }
+                } else if (direction.equals("Right")) {
+                    if ((((ship1.getX() != ship0.getX() + objectSize + 20f) && (ship0.getY() == ship1.getY())) || (ship0.getY() != ship1.getY())) &&
+                            (((ship2.getX() != ship0.getX() + objectSize + 20f) && (ship0.getY() == ship2.getY())) || (ship0.getY() != ship2.getY()))) {
+                        if (ship0.getX() < Gdx.graphics.getWidth() - objectSize - 40) {
+                            if (core.pause == true) {
+                                ship0.addAction(Actions.moveTo(ship0.getX() + objectSize + 20, ship0.getY(), 0.05f));
                             }
                         }
-                    } else if (direction.equals("Null")) {
-                        ship0.setPosition(ship0.getX(), ship0.getY());
+                    }
+                } else if (direction.equals("Left")) {
+                    if ((((ship1.getX() != ship0.getX() - objectSize - 20f) && (ship0.getY() == ship1.getY())) || (ship0.getY() != ship1.getY())) &&
+                            (((ship2.getX() != ship0.getX() - objectSize - 20f) && (ship0.getY() == ship2.getY())) || (ship0.getY() != ship2.getY()))) {
+                        if (ship0.getX() > 40) {
+                            if (core.pause == true) {
+                                ship0.addAction(Actions.moveTo(ship0.getX() - objectSize - 20, ship0.getY(), 0.05f));
+                            }
+                        }
+                    }
+                } else if (direction.equals("Null")) {
+                    ship0.setPosition(ship0.getX(), ship0.getY());
+                }
+
+                super.touchUp(event, x, y, pointer, button);
+            }
+
+        });
+
+        ship1.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                dx = x;
+                dy = y;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ux = x;
+                uy = y;
+                String direction = motion(ux - dx, uy - dy);
+
+                if (direction.equals("Up")) {
+                    if ((ship1.getX() != ship0.getX()) && (ship1.getX() != ship2.getX())) {
+                        if (ship1.getY() == 20) {
+                            if (core.pause == true) {
+                                ship1.addAction(Actions.moveTo(ship1.getX(), ship1.getY() + objectSize + 20, 0.05f));
+                            }
+                        }
                     }
 
-                    super.touchUp(event, x, y, pointer, button);
+                } else if (direction.equals("Down")) {
+                    if ((ship1.getX() != ship0.getX()) && (ship1.getX() != ship2.getX())) {
+                        if (core.pause == true) {
+                            ship1.addAction(Actions.moveTo(ship1.getX(), ship1.getY() - objectSize - 20, 0.05f));
+                        }
+                    }
+                } else if (direction.equals("Right")) {
+                    if ((((ship2.getX() != ship1.getX() + objectSize + 20f) && (ship2.getY() == ship1.getY())) || (ship1.getY() != ship2.getY())) &&
+                            ((((ship0.getX() != ship1.getX() + objectSize + 20f) && (ship1.getY() == ship0.getY())) || (ship1.getY() != ship0.getY())))) {
+                        if (ship1.getX() < Gdx.graphics.getWidth() - objectSize - 40) {
+                            if (core.pause == true) {
+                                ship1.addAction(Actions.moveTo(ship1.getX() + objectSize + 20, ship1.getY(), 0.05f));
+                            }
+                        }
+                    }
+
+                } else if (direction.equals("Left")) {
+                    if ((((ship2.getX() != ship1.getX() - objectSize - 20f) && (ship2.getY() == ship1.getY())) || (ship1.getY() != ship2.getY())) &&
+                            ((((ship0.getX() != ship1.getX() - objectSize - 20f) && (ship1.getY() == ship0.getY())) || (ship1.getY() != ship0.getY())))) {
+                        if (ship1.getX() > 40) {
+                            if (core.pause == true) {
+                                ship1.addAction(Actions.moveTo(ship1.getX() - objectSize - 20, ship1.getY(), 0.05f));
+                            }
+                        }
+                    }
+
+                } else if (direction.equals("Null")) {
+                    ship1.setPosition(ship1.getX(), ship1.getY());
                 }
 
-            });
 
-            ship1.addListener(new InputListener() {
-                @Override
-                public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
-                    dx = x;
-                    dy = y;
-                    return true;
-                }
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
 
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    ux = x;
-                    uy = y;
-                    String direction = motion(ux - dx, uy - dy);
+        ship2.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                dx = x;
+                dy = y;
+                return true;
+            }
 
-                    if (direction.equals("Up")) {
-                        if ((ship1.getX() != ship0.getX()) && (ship1.getX() != ship2.getX())) {
-                            if (ship1.getY() == 20) {
-                                if(core.pause==true){
-                                ship1.addAction(Actions.moveTo(ship1.getX(), ship1.getY() + objectSize + 20, 0.05f));}
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ux = x;
+                uy = y;
+                String direction = motion(ux - dx, uy - dy);
+
+                if (direction.equals("Up")) {
+                    if ((ship2.getX() != ship0.getX()) && (ship2.getX() != ship1.getX())) {
+                        if (ship2.getY() == 20) {
+                            if (core.pause == true) {
+                                ship2.addAction(Actions.moveTo(ship2.getX(), ship2.getY() + objectSize + 20, 0.05f));
                             }
                         }
+                    }
 
-                    } else if (direction.equals("Down")) {
-                        if ((ship1.getX() != ship0.getX()) && (ship1.getX() != ship2.getX())) {
-                            if(core.pause==true){
-                            ship1.addAction(Actions.moveTo(ship1.getX(), ship1.getY() - objectSize - 20, 0.05f));}
+                } else if (direction.equals("Down")) {
+                    if ((ship2.getX() != ship0.getX()) && (ship2.getX() != ship1.getX())) {
+                        if (core.pause == true) {
+                            ship2.addAction(Actions.moveTo(ship2.getX(), ship2.getY() - objectSize - 20, 0.05f));
                         }
-                    } else if (direction.equals("Right")) {
-                        if ((((ship2.getX() != ship1.getX() + objectSize + 20f) && (ship2.getY() == ship1.getY())) || (ship1.getY() != ship2.getY())) &&
-                                ((((ship0.getX() != ship1.getX() + objectSize + 20f) && (ship1.getY() == ship0.getY())) || (ship1.getY() != ship0.getY())))) {
-                            if (ship1.getX() < Gdx.graphics.getWidth() - objectSize - 40) {
-                                if(core.pause==true){
-                                ship1.addAction(Actions.moveTo(ship1.getX() + objectSize + 20, ship1.getY(), 0.05f));}
+                    }
+                } else if (direction.equals("Right")) {
+                    if ((((ship1.getX() != ship2.getX() + objectSize + 20f) && (ship1.getY() == ship2.getY())) || (ship2.getY() != ship1.getY())) &&
+                            ((((ship0.getX() != ship2.getX() + objectSize + 20f) && (ship0.getY() == ship2.getY())) || (ship2.getY() != ship0.getY())))) {
+                        if (ship2.getX() < Gdx.graphics.getWidth() - objectSize - 40) {
+                            if (core.pause == true) {
+                                ship2.addAction(Actions.moveTo(ship2.getX() + objectSize + 20, ship2.getY(), 0.05f));
                             }
                         }
+                    }
 
-                    } else if (direction.equals("Left")) {
-                        if ((((ship2.getX() != ship1.getX() - objectSize - 20f) && (ship2.getY() == ship1.getY())) || (ship1.getY() != ship2.getY())) &&
-                                ((((ship0.getX() != ship1.getX() - objectSize - 20f) && (ship1.getY() == ship0.getY())) || (ship1.getY() != ship0.getY())))) {
-                            if (ship1.getX() > 40) {
-                                if(core.pause==true){
-                                ship1.addAction(Actions.moveTo(ship1.getX() - objectSize - 20, ship1.getY(), 0.05f));}
+                } else if (direction.equals("Left")) {
+                    if ((((ship1.getX() != ship2.getX() - objectSize - 20f) && (ship1.getY() == ship2.getY())) || (ship2.getY() != ship1.getY())) &&
+                            ((((ship0.getX() != ship2.getX() - objectSize - 20f) && (ship0.getY() == ship2.getY())) || (ship2.getY() != ship0.getY())))) {
+                        if (ship2.getX() > 40) {
+                            if (core.pause == true) {
+                                ship2.addAction(Actions.moveTo(ship2.getX() - objectSize - 20, ship2.getY(), 0.05f));
                             }
                         }
-
-                    } else if (direction.equals("Null")) {
-                        ship1.setPosition(ship1.getX(), ship1.getY());
                     }
 
 
-                    super.touchUp(event, x, y, pointer, button);
-                }
-            });
-
-            ship2.addListener(new InputListener() {
-                @Override
-                public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
-                    dx = x;
-                    dy = y;
-                    return true;
+                } else if (direction.equals("Null")) {
+                    ship2.setPosition(ship2.getX(), ship2.getY());
                 }
 
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    ux = x;
-                    uy = y;
-                    String direction = motion(ux - dx, uy - dy);
 
-                    if (direction.equals("Up")) {
-                        if ((ship2.getX() != ship0.getX()) && (ship2.getX() != ship1.getX())) {
-                            if (ship2.getY() == 20) {
-                                if(core.pause==true){
-                                ship2.addAction(Actions.moveTo(ship2.getX(), ship2.getY() + objectSize + 20, 0.05f));}
-                            }
-                        }
-
-                    } else if (direction.equals("Down")) {
-                        if ((ship2.getX() != ship0.getX()) && (ship2.getX() != ship1.getX())) {
-                            if(core.pause==true){
-                            ship2.addAction(Actions.moveTo(ship2.getX(), ship2.getY() - objectSize - 20, 0.05f));}
-                        }
-                    } else if (direction.equals("Right")) {
-                        if ((((ship1.getX() != ship2.getX() + objectSize + 20f) && (ship1.getY() == ship2.getY())) || (ship2.getY() != ship1.getY())) &&
-                                ((((ship0.getX() != ship2.getX() + objectSize + 20f) && (ship0.getY() == ship2.getY())) || (ship2.getY() != ship0.getY())))) {
-                            if (ship2.getX() < Gdx.graphics.getWidth() - objectSize - 40) {
-                                if(core.pause==true){
-                                ship2.addAction(Actions.moveTo(ship2.getX() + objectSize + 20, ship2.getY(), 0.05f));}
-                            }
-                        }
-
-                    } else if (direction.equals("Left")) {
-                        if ((((ship1.getX() != ship2.getX() - objectSize - 20f) && (ship1.getY() == ship2.getY())) || (ship2.getY() != ship1.getY())) &&
-                                ((((ship0.getX() != ship2.getX() - objectSize - 20f) && (ship0.getY() == ship2.getY())) || (ship2.getY() != ship0.getY())))) {
-                            if (ship2.getX() > 40) {
-                                if(core.pause==true){
-                                ship2.addAction(Actions.moveTo(ship2.getX() - objectSize - 20, ship2.getY(), 0.05f));}
-                            }
-                        }
-
-
-                    } else if (direction.equals("Null")) {
-                        ship2.setPosition(ship2.getX(), ship2.getY());
-                    }
-
-
-                    super.touchUp(event, x, y, pointer, button);
-                }
-            });
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
 
 
     }
 
-    public String motion (float deltaX, float deltaY) {
+    public String motion(float deltaX, float deltaY) {
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
             if (deltaX > 0) {
                 Gdx.app.log("direction", "Right");//Right
@@ -409,14 +416,13 @@ public class GameScreen implements Screen {
         return null;
     }
 
-    public  void update(float dt) {
-        if(core.pause==true) {
+    public void update(float dt) {
+        if (core.pause == true) {
             garbage0.setY(garbage0.getY() - del);
             garbage1.setY(garbage1.getY() - del);
 
             backgraund0.update();
             backgraund1.update();
-
 
             point2++;
             if (point2 % 10 == 0) {
@@ -439,9 +445,10 @@ public class GameScreen implements Screen {
 
             if ((rctGarbage0.overlaps(rctShip0)) || (rctGarbage0.overlaps(rctShip1)) || (rctGarbage0.overlaps(rctShip2)) ||
                     (rctGarbage1.overlaps(rctShip0)) || (rctGarbage1.overlaps(rctShip1)) || (rctGarbage1.overlaps(rctShip2))) {
-                if(core.settingsPref.getBoolean("settingsVibro")==true){
-                    Gdx.input.vibrate(250);}
-           core.setScreen(new DeadMenuScreen(core));
+                if (core.settingsPref.getBoolean("settingsVibro") == true) {
+                    Gdx.input.vibrate(250);
+                }
+                core.setScreen(new DeadMenuScreen(core));
                 Music.pause();
 
             }
@@ -449,15 +456,16 @@ public class GameScreen implements Screen {
             core.point = point;
             core.speed = speedInt;
         }
-        if(core.point>core.prefs.getInteger("record")) {
+        if (core.point > core.prefs.getInteger("record")) {
             core.prefs.putInteger("record", point);
             core.prefs.flush();
         }
- }
+    }
 
 
     @Override
-    public void show() {}
+    public void show() {
+    }
 
     @Override
     public void render(float dt) {
@@ -477,26 +485,28 @@ public class GameScreen implements Screen {
         batch.begin();
         font.draw(batch, "Points: " + point, 20, Gdx.graphics.getHeight() - 10);
         font.draw(batch, "Speed: " + speedInt, 40 + objectSize, Gdx.graphics.getHeight() - 10);
-        font.draw(batch, "Best: "+core.prefs.getInteger("record"), 60+objectSize*2-objectSize/6, Gdx.graphics.getHeight()-10);
+        font.draw(batch, "Best: " + core.prefs.getInteger("record"), 60 + objectSize * 2 - objectSize / 6, Gdx.graphics.getHeight() - 10);
         batch.end();
 
 
-       }
-
-
+    }
 
 
     @Override
-    public void resize(int width, int height) {}
+    public void resize(int width, int height) {
+    }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     @Override
-    public void hide() {}
+    public void hide() {
+    }
 
     @Override
     public void dispose() {
@@ -511,7 +521,6 @@ public class GameScreen implements Screen {
         generator.dispose();
 
     }
-
 
 
 }

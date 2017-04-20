@@ -4,19 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.lurd.game.MainGame;
 import com.lurd.game.gui.Backgraund;
-import com.lurd.game.gui.Button;
-
-import static com.badlogic.gdx.Gdx.app;
-import static com.badlogic.gdx.Gdx.input;
 
 public class HistoryScreen implements Screen {
 
@@ -24,7 +15,7 @@ public class HistoryScreen implements Screen {
     Stage stage;
     SpriteBatch batch;
     Backgraund backgraund;
-    int pag=1;
+    int pag = 1;
     boolean catchBackKey;
 
 
@@ -51,8 +42,6 @@ public class HistoryScreen implements Screen {
 
     @Override
     public void show() {
-
-
 
 
         Gdx.input.setInputProcessor(new InputProcessor() {
@@ -106,18 +95,15 @@ public class HistoryScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
-     //   font.draw(batch, "Best: 500", 40+Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/5+40 );
+        //   font.draw(batch, "Best: 500", 40+Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/5+40 );
 //        font.draw(batch, " "+core.recordInt, 100, 100);
         //if(catchBackKey==true){
-       //     core.setScreen(new MainMenuScreen(core));
-       // }
+        //     core.setScreen(new MainMenuScreen(core));
+        // }
 
         batch.end();
         stage.act();
         stage.draw();
-
-
-
 
 
     }

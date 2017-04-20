@@ -10,7 +10,7 @@ public class Button extends Actor {
 
     Texture texture;
 
-    public Button(String i , float x, float y, float  width, float height) {
+    public Button(String i, float x, float y, float width, float height) {
         texture = new Texture(Gdx.files.internal(i));
         setPosition(x, y);
         setSize(width, height);

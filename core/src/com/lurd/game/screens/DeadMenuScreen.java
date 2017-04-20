@@ -36,8 +36,7 @@ public class DeadMenuScreen implements Screen {
     FreeTypeFontGenerator.FreeTypeFontParameter parameter;
 
 
-
-    int sizeButton = (Gdx.graphics.getHeight  ()-6*20)/5;
+    int sizeButton = (Gdx.graphics.getHeight() - 6 * 20) / 5;
 
     public DeadMenuScreen(MainGame c) {
         core = c;
@@ -48,9 +47,8 @@ public class DeadMenuScreen implements Screen {
         generator = new FreeTypeFontGenerator(Gdx.files.internal("1234.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.color = mycolor;
-        parameter.size= Gdx.graphics.getWidth() / 17;
+        parameter.size = Gdx.graphics.getWidth() / 17;
         font = generator.generateFont(parameter);
-
 
 
         if (core.settingsPref.getBoolean("settingsMusic") == true) {
@@ -59,17 +57,18 @@ public class DeadMenuScreen implements Screen {
         }
 
         backgraund = new Texture("fone_12.png");
-        stage.addActor( menuButton = new Button("MENU2.png", Gdx.graphics.getWidth() / 2 - (Gdx.graphics.getWidth() / 3) / 2, 20, Gdx.graphics.getWidth() / 3, sizeButton));
-        stage.addActor(restartButton = new Button("RESTART2.png", Gdx.graphics.getWidth() / 2 - (Gdx.graphics.getWidth() / 2) / 2, sizeButton + 40, Gdx.graphics.getWidth() / 2, sizeButton ));
+        stage.addActor(menuButton = new Button("MENU2.png", Gdx.graphics.getWidth() / 2 - (Gdx.graphics.getWidth() / 3) / 2, 20, Gdx.graphics.getWidth() / 3, sizeButton));
+        stage.addActor(restartButton = new Button("RESTART2.png", Gdx.graphics.getWidth() / 2 - (Gdx.graphics.getWidth() / 2) / 2, sizeButton + 40, Gdx.graphics.getWidth() / 2, sizeButton));
         stage.addActor(pointImg = new Button("POINTS2.png", 20, Gdx.graphics.getHeight() - 20 - sizeButton / 2, Gdx.graphics.getWidth() / 2, sizeButton / 2));
-        stage.addActor( speedImg = new Button("SPEED2.png",20, Gdx.graphics.getHeight() - 40 - sizeButton, Gdx.graphics.getWidth() / 2, sizeButton / 2 ));
+        stage.addActor(speedImg = new Button("SPEED2.png", 20, Gdx.graphics.getHeight() - 40 - sizeButton, Gdx.graphics.getWidth() / 2, sizeButton / 2));
         stage.addActor(bestImg = new Button("BEST2.png", 20, Gdx.graphics.getHeight() - 60 - sizeButton - sizeButton / 2, Gdx.graphics.getWidth() / 2, sizeButton / 2));
 
         menuButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
-                if(core.settingsPref.getBoolean("settingsVibro")==true){
-                    Gdx.input.vibrate(50);}
+                if (core.settingsPref.getBoolean("settingsVibro") == true) {
+                    Gdx.input.vibrate(50);
+                }
                 core.setScreen(new MainMenuScreen(core));
                 return true;
             }
@@ -78,15 +77,16 @@ public class DeadMenuScreen implements Screen {
         restartButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
-                if(core.settingsPref.getBoolean("settingsVibro")==true){
-                    Gdx.input.vibrate(50);}
+                if (core.settingsPref.getBoolean("settingsVibro") == true) {
+                    Gdx.input.vibrate(50);
+                }
                 core.setScreen(new GameScreen(core));
                 return true;
             }
         });
 
-       menuButton.addAction(Actions.moveTo(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 3), menuButton.getY(), 1));
-       restartButton.addAction(Actions.moveTo(0, restartButton.getY(), 1));
+        menuButton.addAction(Actions.moveTo(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 3), menuButton.getY(), 1));
+        restartButton.addAction(Actions.moveTo(0, restartButton.getY(), 1));
     }
 
     @Override
@@ -139,48 +139,51 @@ public class DeadMenuScreen implements Screen {
         });
         Gdx.input.setInputProcessor(im);
         Gdx.input.setCatchBackKey(true);
-       }
+    }
 
     @Override
     public void render(float delta) {
         batch.begin();
         batch.draw(backgraund, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        font.draw(batch, " " + core.point, pointImg.getWidth() + 40, pointImg.getY() + Gdx.graphics.getHeight()/15);
-        font.draw(batch, " "+core.speed, speedImg.getWidth()+40 , speedImg.getY()+Gdx.graphics.getHeight()/15);
-        font.draw(batch, " "+core.prefs.getInteger("record"), bestImg.getWidth()+40 , bestImg.getY()+Gdx.graphics.getHeight()/15);
+        font.draw(batch, " " + core.point, pointImg.getWidth() + 40, pointImg.getY() + Gdx.graphics.getHeight() / 15);
+        font.draw(batch, " " + core.speed, speedImg.getWidth() + 40, speedImg.getY() + Gdx.graphics.getHeight() / 15);
+        font.draw(batch, " " + core.prefs.getInteger("record"), bestImg.getWidth() + 40, bestImg.getY() + Gdx.graphics.getHeight() / 15);
         batch.end();
         stage.act();
         stage.draw();
 
 
-
-        if(menuButton.getX()==Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()/3)){
+        if (menuButton.getX() == Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 3)) {
             menuButton.addAction(Actions.moveTo(0, menuButton.getY(), 3));
         }
-        if(menuButton.getX()==0){
-            menuButton.addAction(Actions.moveTo(Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()/3), menuButton.getY(),3));
+        if (menuButton.getX() == 0) {
+            menuButton.addAction(Actions.moveTo(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 3), menuButton.getY(), 3));
         }
 
-        if(restartButton.getX()==Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()/2)){
+        if (restartButton.getX() == Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 2)) {
             restartButton.addAction(Actions.moveTo(0, restartButton.getY(), 3));
         }
-        if(restartButton.getX()==0){
+        if (restartButton.getX() == 0) {
             restartButton.addAction(Actions.moveTo(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 2), restartButton.getY(), 3));
         }
     }
 
     @Override
-    public void resize(int width, int height) { }
+    public void resize(int width, int height) {
+    }
 
     @Override
-    public void pause() { }
+    public void pause() {
+    }
 
     @Override
-    public void resume() { }
+    public void resume() {
+    }
 
     @Override
-    public void hide() { }
+    public void hide() {
+    }
 
     @Override
     public void dispose() {

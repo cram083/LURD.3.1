@@ -24,7 +24,7 @@ public class SettingsScreen implements Screen {
     Button vibro;
     Button music;
     InputMultiplexer im;
-    float size = Gdx.graphics.getHeight()/10;
+    float size = Gdx.graphics.getHeight() / 10;
 
     public SettingsScreen(MainGame c) {
         core = c;
@@ -32,21 +32,24 @@ public class SettingsScreen implements Screen {
         stage = new Stage();
         backgraund = new Texture("fone_12.png");
 
-        if(core.settingsPref.getBoolean("settingsVibro")==true){
-        stage.addActor( vibro = new Button("vibro.png", 0, Gdx.graphics.getHeight()-size*2-20, size,size));}
-        else {stage.addActor( vibro = new Button("vibroOff.png", 0, Gdx.graphics.getHeight()-size*2-20 , size, size));}
+        if (core.settingsPref.getBoolean("settingsVibro") == true) {
+            stage.addActor(vibro = new Button("vibro.png", 0, Gdx.graphics.getHeight() - size * 2 - 20, size, size));
+        } else {
+            stage.addActor(vibro = new Button("vibroOff.png", 0, Gdx.graphics.getHeight() - size * 2 - 20, size, size));
+        }
 
-        if(core.settingsPref.getBoolean("settingsMusic")==true){
-            stage.addActor( music = new Button("music.png", Gdx.graphics.getWidth()- size, Gdx.graphics.getHeight()-size*3-40,Gdx.graphics.getHeight()/10, Gdx.graphics.getHeight()/10));}
-        else {stage.addActor(music = new Button("musicOff.png", Gdx.graphics.getWidth()- size, Gdx.graphics.getHeight()-size*3-40, Gdx.graphics.getHeight()/10, Gdx.graphics.getHeight()/10));}
+        if (core.settingsPref.getBoolean("settingsMusic") == true) {
+            stage.addActor(music = new Button("music.png", Gdx.graphics.getWidth() - size, Gdx.graphics.getHeight() - size * 3 - 40, Gdx.graphics.getHeight() / 10, Gdx.graphics.getHeight() / 10));
+        } else {
+            stage.addActor(music = new Button("musicOff.png", Gdx.graphics.getWidth() - size, Gdx.graphics.getHeight() - size * 3 - 40, Gdx.graphics.getHeight() / 10, Gdx.graphics.getHeight() / 10));
+        }
 
-       // vibro.addAction(Actions.moveTo((int) Gdx.graphics.getWidth() - size, Gdx.graphics.getHeight()-size*2, 3));
+        // vibro.addAction(Actions.moveTo((int) Gdx.graphics.getWidth() - size, Gdx.graphics.getHeight()-size*2, 3));
         vibro.addAction(Actions.moveTo(Gdx.graphics.getWidth() - size, vibro.getY(), 3));
-        music.addAction(Actions.moveTo((int) 0 , music.getY(),  3));
+        music.addAction(Actions.moveTo((int) 0, music.getY(), 3));
 
 
         Gdx.input.setInputProcessor(stage);
-
 
 
         vibro.addListener(new InputListener() {
@@ -86,7 +89,6 @@ public class SettingsScreen implements Screen {
                 return true;
             }
         });
-
 
 
         Gdx.input.setInputProcessor(stage);
@@ -150,22 +152,22 @@ public class SettingsScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
-        batch.draw(backgraund, 0, 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(backgraund, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
         stage.act();
         stage.draw();
 
-        if(vibro.getX()==(Gdx.graphics.getWidth()-size)){
+        if (vibro.getX() == (Gdx.graphics.getWidth() - size)) {
             vibro.addAction(Actions.moveTo(0, vibro.getY(), 4));
         }
-        if(vibro.getX()==0){
-            vibro.addAction(Actions.moveTo( Gdx.graphics.getWidth()- size, vibro.getY(), 4));
+        if (vibro.getX() == 0) {
+            vibro.addAction(Actions.moveTo(Gdx.graphics.getWidth() - size, vibro.getY(), 4));
         }
 
-        if(music.getX()==0){
-            music.addAction(Actions.moveTo( Gdx.graphics.getWidth()- size, music.getY(), 4));
+        if (music.getX() == 0) {
+            music.addAction(Actions.moveTo(Gdx.graphics.getWidth() - size, music.getY(), 4));
         }
-        if(music.getX()==(Gdx.graphics.getWidth()-size)){
+        if (music.getX() == (Gdx.graphics.getWidth() - size)) {
             music.addAction(Actions.moveTo(0, music.getY(), 4));
         }
 

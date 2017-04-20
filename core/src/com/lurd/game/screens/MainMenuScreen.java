@@ -14,7 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.lurd.game.MainGame;
 import com.lurd.game.gui.Button;
 
-import static com.badlogic.gdx.Gdx.*;
+import static com.badlogic.gdx.Gdx.files;
+import static com.badlogic.gdx.Gdx.graphics;
 
 public class MainMenuScreen implements Screen {
 
