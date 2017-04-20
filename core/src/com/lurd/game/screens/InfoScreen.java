@@ -1,6 +1,8 @@
 package com.lurd.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,24 +25,59 @@ public class InfoScreen implements Screen {
         batch = new SpriteBatch();
         stage = new Stage();
         backgraund = new Texture("foneinfo.png");
-        stage.addActor( back = new Button("back.png", Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/10-20, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/12, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/12 ));
-
 
         Gdx.input.setInputProcessor(stage);
-
-        back.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
-                if(core.settingsPref.getBoolean("settingsVibro")==true){
-                    Gdx.input.vibrate(50);}
-                core.setScreen(new MainMenuScreen(core));
-                return true;
-            }
-        });
+        Gdx.input.setCatchBackKey(true);
     }
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(new InputProcessor() {
+
+            @Override
+            public boolean keyDown(int keycode) {
+                return false;
+            }
+
+            @Override
+            public boolean keyUp(int keycode) {
+                if (keycode == Input.Keys.BACK) {
+                    core.setScreen(new MainMenuScreen(core));
+                }
+                return false;
+            }
+
+            @Override
+            public boolean keyTyped(char character) {
+                return false;
+            }
+
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                return false;
+            }
+
+            @Override
+            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+                return false;
+            }
+
+            @Override
+            public boolean touchDragged(int screenX, int screenY, int pointer) {
+                return false;
+            }
+
+            @Override
+            public boolean mouseMoved(int screenX, int screenY) {
+                return false;
+            }
+
+            @Override
+            public boolean scrolled(int amount) {
+                return false;
+            }
+        });
+
 
     }
 
