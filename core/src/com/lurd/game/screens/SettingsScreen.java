@@ -2,6 +2,7 @@ package com.lurd.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,6 +23,7 @@ public class SettingsScreen implements Screen {
     Button back;
     Button vibro;
     Button music;
+    InputMultiplexer im;
     float size = Gdx.graphics.getHeight()/10;
 
     public SettingsScreen(MainGame c) {
@@ -93,8 +95,9 @@ public class SettingsScreen implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(new InputProcessor() {
-
+        im = new InputMultiplexer();
+        im.addProcessor(stage);
+        im.addProcessor(new InputProcessor() {
             @Override
             public boolean keyDown(int keycode) {
                 return false;
@@ -138,6 +141,8 @@ public class SettingsScreen implements Screen {
                 return false;
             }
         });
+        Gdx.input.setInputProcessor(im);
+        Gdx.input.setCatchBackKey(true);
 
 
     }

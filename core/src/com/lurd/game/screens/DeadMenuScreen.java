@@ -2,6 +2,7 @@ package com.lurd.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -29,6 +30,7 @@ public class DeadMenuScreen implements Screen {
     Button speedImg;
     Button bestImg;
     Color mycolor;
+    InputMultiplexer im;
 
     FreeTypeFontGenerator generator;
     FreeTypeFontGenerator.FreeTypeFontParameter parameter;
@@ -50,6 +52,7 @@ public class DeadMenuScreen implements Screen {
         font = generator.generateFont(parameter);
 
 
+
         if (core.settingsPref.getBoolean("settingsMusic") == true) {
             core.MenuMusic.setLooping(true);
             core.MenuMusic.play();
@@ -61,10 +64,6 @@ public class DeadMenuScreen implements Screen {
         stage.addActor(pointImg = new Button("POINTS2.png", 20, Gdx.graphics.getHeight() - 20 - sizeButton / 2, Gdx.graphics.getWidth() / 2, sizeButton / 2));
         stage.addActor( speedImg = new Button("SPEED2.png",20, Gdx.graphics.getHeight() - 40 - sizeButton, Gdx.graphics.getWidth() / 2, sizeButton / 2 ));
         stage.addActor(bestImg = new Button("BEST2.png", 20, Gdx.graphics.getHeight() - 60 - sizeButton - sizeButton / 2, Gdx.graphics.getWidth() / 2, sizeButton / 2));
-
-
-        Gdx.input.setInputProcessor(stage);
-        Gdx.input.setCatchBackKey(true);
 
         menuButton.addListener(new InputListener() {
             @Override
@@ -92,8 +91,9 @@ public class DeadMenuScreen implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(new InputProcessor() {
-
+        im = new InputMultiplexer();
+        im.addProcessor(stage);
+        im.addProcessor(new InputProcessor() {
             @Override
             public boolean keyDown(int keycode) {
                 return false;
@@ -137,10 +137,9 @@ public class DeadMenuScreen implements Screen {
                 return false;
             }
         });
-
-
-
-    }
+        Gdx.input.setInputProcessor(im);
+        Gdx.input.setCatchBackKey(true);
+       }
 
     @Override
     public void render(float delta) {
